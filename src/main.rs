@@ -1,16 +1,26 @@
 use std::process::Command;
-use std::io::stdin;
+use std::io::{stdin, stdout, Write};
 
 fn main() {
-    // Read user input
-    let mut input = String::new();
-    stdin().read_line(&mut input).unwrap();
+    loop {
+        // Use '>' character as the prompt
+        // Flush it to ensure it prints before read_line
+        print!("> ");
+        let _ = stdout().flush();
 
-    // Remove trailing newline from read_line()
-    let command = input.trim();
+        // Read user input
+        let mut input = String::new();
+        stdin().read_line(&mut input).unwrap();
 
-    // Run the command inserted by the user
-    Command::new(command)
-        .spawn()
-        .unwrap();
+        // Remove trailing newline from read_line
+        let command = input.trim();
+
+        // Run the command inserted by the user
+        let mut child = Command::new(command)
+            .spawn()
+            .unwrap();
+
+        // Wait until previous command has been executed before accepting another
+        let _ = child.wait();
+    }
 }
