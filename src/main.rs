@@ -12,11 +12,14 @@ fn main() {
         let mut input = String::new();
         stdin().read_line(&mut input).unwrap();
 
-        // Remove trailing newline from read_line
-        let command = input.trim();
+        // Split the input into the command and the arguments
+        let mut parts = input.trim().split_whitespace();
+        let command = parts.next().unwrap();
+        let args = parts;
 
         // Run the command inserted by the user
         let mut child = Command::new(command)
+            .args(args)
             .spawn()
             .unwrap();
 
