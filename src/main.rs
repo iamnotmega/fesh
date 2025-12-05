@@ -20,7 +20,7 @@ fn main() {
         let args = parts;
 
         match command { // Handle shell built-ins
-            "cd" => { // cd builtin
+            "cd" => { // cd built-in
                 // Default to '/' if a directory was not provided
                 let new_dir = args.peekable().peek().map_or("/", |x| *x);
                 let root = Path::new(new_dir);
@@ -28,15 +28,18 @@ fn main() {
                     eprintln!("{}", e); // Throw error on failure
                 }
             },
+            "exit" => return, // exit built-in
             command => { // Normal not built-in command
                 // Run the command inserted by the user
-                let mut child = Command::new(command)
+                let child = Command::new(command)
                     .args(args)
-                    .spawn()
-                    .unwrap();
-
-                // Wait until previous command has been executed before accepting another
-                let _ = child.wait();
+                    .spawn();
+                
+                // Gracefully handle malformed user input
+                match child {
+                    Ok(mut child) => { let _ = child.wait(); },
+                    Err(e) => eprintln!("{}", e),
+                };
             }
         }
     }
