@@ -11,6 +11,13 @@ fn main(){
         return;
     }
 
+    // Check for --help flag to display help
+    if std::env::args().any(|a| a == "--help" || a == "-h") {
+        println!("Usage: fesh [options]");
+        println!("  --version, -v   Show version");
+         println!("  --help, -h  Show this help menu");
+    }
+
     loop {
         // Use '>' character as the shell prompt
         // Flush it to ensure it prints before read_line
