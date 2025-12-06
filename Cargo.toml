@@ -1,6 +1,7 @@
 [package]
 name = "fesh"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2024"
 
 [dependencies]
+whoami = "1.6.1"
