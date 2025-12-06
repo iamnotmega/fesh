@@ -1,6 +1,5 @@
 # Fesh
-
-Fesh is a shell written in Rust, designed for performance.
+Fesh is a shell made for Oxide Linux. 
 
 ## Installation
 1. Download the [latest available binary](https://github.com/iamnotmega/fesh/releases).
