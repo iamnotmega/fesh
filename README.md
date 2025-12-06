@@ -1,6 +1,6 @@
 # Fesh
 
-Fesh is an experimental shell written in Rust, designed for performance.
+Fesh is a shell written in Rust, designed for performance.
 
 ## Installation
 1. Download the [latest available binary](https://github.com/iamnotmega/fesh/releases).
