@@ -4,6 +4,13 @@ use std::io::{stdout, stdin, Write};
 use std::path::Path;
 
 fn main(){
+
+    // Check for --version flag to display shell version
+    if std::env::args().any(|a| a == "--version" || a == "-v")  {
+        println!("Fesh {} ({})", env!("CARGO_PKG_VERSION"), std::env::consts::ARCH);
+        return;
+    }
+
     loop {
         // Use '>' character as the shell prompt
         // Flush it to ensure it prints before read_line
